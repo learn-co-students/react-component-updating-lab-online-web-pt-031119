@@ -23,6 +23,12 @@ class Timer extends Component {
     clearInterval(this.interval);
   }
 
+  componentDidUpdate(){
+    // console.log(this.timer.current)
+    this.timer.current.style.color =
+  "#" + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
   render() {
     const { time, color, logText } = this.state;
     return (
@@ -45,6 +51,13 @@ class Timer extends Component {
     clearInterval(this.interval);
     this.setState({ className: "hidden" });
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.time === nextState.time) {
+      return false
+    }
+    return true
+  }
 
   // for the 'x' button,
   handleClose = () => {
